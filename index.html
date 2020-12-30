@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Paint</title>
+<style>
+	body{
+		margin: 0px;			
+
+	}
+	canvas{
+		display: block;
+	}	
+		
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+
+	<script>
+
+
+		
+		var cvs = document.getElementById("canvas");
+		var ctx = cvs.getContext("2d");
+//Размер		
+	cvs.width = window.innerWidth;
+	cvs.height = window.innerHeight;
+////////////////////////////////////////////
+
+/*	
+						//Немного canvas
+			//Делаем квадрат
+		//Анимируем
+	var x = 1		
+	ctx.fillStyle = "red";// Стандартный цвет . цвет фигуры
+	//ctx.fillRect(x, 30, 400, 400);//Позиции по x и y, ширина и высота
+////////////////////////////////////////////////////
+		
+		//Анимируем
+	setInterval(function(){
+		ctx.fillStyle = "white";
+		ctx.fillRect(0, 0, cvs.width, cvs.height); //Все очищает
+		ctx.clearRect(0,0,w,h)//Альтернатива очитки
+		
+		ctx.fillStyle = "red";
+		ctx.fillRect(x++, 30, 30, 30);
+	
+		
+	}, 10);// 10 секунд		*/
+	
+//	fillStyle()//Определяет цвет для всего что заполняеться
+	
+			//Квадат не заполеный
+	/*		
+		ctx.strokeStyle = "red";//Иземнить цвет stroke	
+		ctx.lineWidth = 10; //Ширина обмаотки
+		ctx.strokeRect(50, 50, 300, 300);
+	//////////////////////////////////////
+	*/
+/*	
+			//Круг
+			
+	ctx.arc(cvs.width / 2, cvs.height / 2, 100, 0, 360);//5 значений по х и у, радиус, началои конец круга 
+	ctx.fillStyle = "red";
+		ctx.fill(); //Заполнить
+*/	
+////////////////////////////////////////////////////
+/*	
+	// Рысование	
+		ctx.fillStyle = "red";
+		ctx.beginPath();
+		ctx.moveTo(50, 50);//Начальная позиция точки
+		ctx.lineTo(55, 100);
+		ctx.lineTo(100, 25);
+		ctx.lineTo(150, 120);
+		
+		ctx.rotate(.2);
+		
+		ctx.closePath(); //соеденить последн точку и первую
+		
+		ctx.stroke();//Вызвать наривованое
+	*/	
+	
+		//	Текст в canvas 
+		
+/*		
+	ctx.fillStyle = "green";	
+	ctx.textAlign = "center";
+	ctx.font = "50px, sans-serif";	
+	ctx.fillText('Дааа, заработало наконецто, какой-то текст просто что-бы больше слов было', cvs.width / 2, cvs.height / 2); // Текст и Х и Y и по центру
+*/		
+		
+	// Paint	
+	
+	function clear(){
+		ctx.fillStyle = "white";
+		ctx.fillRect(0, 0, cvs.width, cvs.height);
+		
+		ctx.beginPath();
+		ctx.fillStyle = "red";
+		
+	}
+	
+	
+		var dawn = false;
+		var coords = [];
+		cvs.addEventListener("mousedown", function(){
+			ctx.fillStyle = "black";
+			dawn = true;
+		});
+		cvs.addEventListener("mouseup", function(){
+			dawn = false;
+			ctx.beginPath();
+		});
+		
+
+		
+		cvs.addEventListener('mousemove', function(e){ //При нажатии на кнопку мыши
+		
+//	mousedown - при нажатии на кнопку мыши	
+//	mouseup - когда мышка отпущена
+//	mousemove - привождении мыши
+
+
+		if(dawn){//Когда кнопка зажата
+		coords.push([e.clientX, e.clientY]); //Добавальеться в конец масива
+		
+		ctx.lineTo(e.clientX, e.clientY);//От клинта
+		ctx.stroke();
+		ctx.lineWidth = 8;
+		
+			ctx.beginPath();// Начинает конструкор или сбрасывает текущий
+			
+			ctx.arc(e.clientX, e.clientY, 4, 0, Math.PI * 2);// Итак x и y создает клиент сайта
+			ctx.fillStyle = "black";
+			ctx.fill();
+
+		ctx.beginPath();	
+		ctx.moveTo(e.clientX, e.clientY);
+		}
+
+		});
+		
+
+	document.addEventListener("keydown", function(e){
+
+		if(e.keyCode == 82){
+			clear();
+		}
+	});
+		
+	
+		
+	</script>
+	</body>
+</html>
